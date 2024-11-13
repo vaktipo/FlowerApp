@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Flower app</string>
+    <string name="title_home">Home</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_profile">Profile</string>
+    <string name="create_an_account_undrl"><u>Create an account</u></string>
+    <string name="first_time">First time?</string>
+    <string name="log_in_with_google">Log in with Google</string>
+    <string name="log_in">Log in</string>
+    <string name="or">or</string>
+    <string name="i_forgot_my_password"><u>I forgot my password</u></string>
+    <string name="password">Password:</string>
+    <string name="email">Email:</string>
+    <string name="have_an_account">Have an account?</string>
+    <string name="log_in_now"><u>Log in now!</u>></string>
+    <string name="create_an_account">Create an account</string>
+    <string name="sign_up_with_google">Sign up with Google</string>
+    <string name="register">Register</string>
+    <string name="name">Name:</string>
+    <string name="i_agree_to_the">I agree to the</string>
+    <string name="terms_and_conditions"><u>Terms and Conditions</u></string>
+</resources>

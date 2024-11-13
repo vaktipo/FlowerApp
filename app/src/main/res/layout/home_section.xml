@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeSection">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/nav_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+    <ImageView
+        android:id="@+id/topPlague"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/upcoming_plague" />
+
+    <ImageView
+        android:id="@+id/notifications"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        app:layout_constraintEnd_toEndOf="@+id/topPlague"
+        app:layout_constraintStart_toStartOf="@+id/topPlague"
+        app:layout_constraintTop_toTopOf="@+id/topPlague"
+        app:srcCompat="@drawable/notifications_plague" />
+
+    <LinearLayout
+        android:id="@+id/top_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/notifications"
+        app:layout_constraintEnd_toEndOf="@+id/notifications"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/topPlague">
+
+        <LinearLayout
+            android:id="@+id/left_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/notifications"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/topPlague">
+
+            <TextView
+                android:id="@+id/goodMorning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Good morning,"
+                android:textColor="@color/dark_green"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Your Name"
+                android:textColor="@color/dark_green"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/bell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="130dp"
+            app:srcCompat="@drawable/bell" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/upcoming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Upcoming:"
+        android:textColor="@color/dark_green"
+        android:textSize="18sp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notifications" />
+
+    <TextView
+        android:id="@+id/upcomingEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="06.12.2024 - Bouquet for Mother "
+        android:textColor="@color/dark_green"
+        android:textSize="22sp"
+        android:layout_marginStart="35dp"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upcoming" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
