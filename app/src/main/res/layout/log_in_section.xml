@@ -38,7 +38,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/Log_in"
+        android:id="@+id/Log_in_google"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginBottom="80dp"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@id/Log_in"
+        app:layout_constraintBottom_toTopOf="@id/Log_in_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
