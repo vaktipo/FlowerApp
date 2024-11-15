@@ -41,7 +41,7 @@
         android:id="@+id/Log_in"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/dark_button"
         android:drawableLeft="@drawable/google_icon"
         android:fontFamily="@font/poppins_bold"

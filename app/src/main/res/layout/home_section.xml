@@ -46,7 +46,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/notifications"
         app:layout_constraintEnd_toEndOf="@+id/notifications"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/topPlague">
+        app:layout_constraintTop_toTopOf="@+id/topPlague"
+        android:layout_marginTop="47dp">
 
         <LinearLayout
             android:id="@+id/left_container"
@@ -64,7 +65,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="Good morning,"
                 android:textColor="@color/dark_green"
-                android:textSize="20sp" />
+                android:textSize="16.5sp" />
 
             <TextView
                 android:id="@+id/name"
@@ -73,16 +74,17 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="Your Name"
                 android:textColor="@color/dark_green"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:layout_marginTop="-15dp"/>
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/bell"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="130dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="10dp"
             app:srcCompat="@drawable/bell" />
     </LinearLayout>
 
@@ -93,8 +95,8 @@
         android:fontFamily="@font/poppins_medium"
         android:text="Upcoming:"
         android:textColor="@color/dark_green"
-        android:textSize="18sp"
-        android:layout_marginStart="35dp"
+        android:textSize="15sp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notifications" />
@@ -105,8 +107,8 @@
         android:layout_height="wrap_content"
         android:text="06.12.2024 - Bouquet for Mother "
         android:textColor="@color/dark_green"
-        android:textSize="22sp"
-        android:layout_marginStart="35dp"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"
         android:fontFamily="@font/poppins_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upcoming" />
