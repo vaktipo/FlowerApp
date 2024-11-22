@@ -66,4 +66,5 @@ dependencies {
     implementation ("androidx.credentials:credentials:1.2.2")
     implementation ("androidx.credentials:credentials-play-services-auth:1.2.2")
     implementation ("com.google.android.libraries.identity.googleid:googleid")
+    implementation ("com.google.firebase:firebase-firestore-ktx:24.4.4")
 }

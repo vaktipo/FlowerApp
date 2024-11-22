@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_mint"
     tools:context=".LogInSection">
 
     <LinearLayout
@@ -24,7 +25,8 @@
             android:layout_height="wrap_content"
             android:text="@string/first_time"
             android:fontFamily="@font/poppins_light"
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textColor="@color/dark_green"/>
         <TextView
             android:id="@+id/create_an_acc"
             android:layout_width="wrap_content"
@@ -32,7 +34,9 @@
             android:text="@string/create_an_account_undrl"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins_light"
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textColor="@color/dark_green"/>
+
 
 
     </LinearLayout>
@@ -79,7 +83,8 @@
             android:layout_height="20dp"
             android:fontFamily="@font/poppins_light"
             android:text="@string/or"
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textColor="@color/dark_green"/>
 
         <View
             android:layout_width="150dp"
@@ -124,11 +129,13 @@
         android:layout_height="50dp"
         android:background="@drawable/light_button"
         android:inputType="textPassword"
+        android:textColor="@color/dark_green"
         android:drawableEnd="@drawable/eye_crossed"
-        android:paddingEnd="15dp"
         app:layout_constraintBottom_toTopOf="@+id/iForgotMy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"/>
 
     <TextView
         android:id="@+id/password_text"
@@ -145,9 +152,12 @@
         android:id="@+id/email_field"
         android:layout_width="350dp"
         android:layout_height="50dp"
+        android:textColor="@color/dark_green"
         android:background="@drawable/light_button"
         android:inputType="textEmailAddress"
         android:layout_marginBottom="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         app:layout_constraintBottom_toTopOf="@+id/password_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

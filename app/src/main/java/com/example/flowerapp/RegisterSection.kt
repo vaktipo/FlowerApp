@@ -15,11 +15,12 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegisterSection : AppCompatActivity() {
-    // Initializing variable for binding, auth, and Google sign-in
+    // Variables for binding, auth, and Google sign-in
     private lateinit var binding: RegisterSectionBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -27,12 +28,10 @@ class RegisterSection : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Setting up binding
         binding = RegisterSectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initializing Firebase Auth
+        // Initialize Firebase Auth
         auth = Firebase.auth
 
         // Configure Google Sign-In options
@@ -42,7 +41,7 @@ class RegisterSection : AppCompatActivity() {
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        // Adding onClickListener to the "Create Account" button (email/password)
+        // Email/Password Registration
         binding.createAnAccount.setOnClickListener {
             val email = binding.emailField.text.toString().trim()
             val password = binding.passwordField.text.toString().trim()
@@ -56,34 +55,51 @@ class RegisterSection : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        Log.d(TAG, "createUserWithEmail:success")
-                        val user = auth.currentUser
-
-                        // Optionally update user profile with the name
-
-
-                        val intent = Intent(this, HomeSection::class.java)
-                        startActivity(intent)
-                        finish() // Prevent returning to the registration screen
+                        val userId = auth.currentUser?.uid
+                        if (userId != null) {
+                            saveUserToFirestore(userId, name, email) // Save name and email to Firestore
+                        }
+                        navigateToHomeSection() // Redirect to HomeSection
                     } else {
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(this, "Registration failed. Try again.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
 
-        // Adding onClickListener to the Google Sign-In button
+        // Google Sign-In
         binding.SignUp.setOnClickListener {
-            Log.d(TAG, "Google Sign-In button clicked")
             signInWithGoogle()
         }
 
-        // Navigate to LogInSection when "createAnAcc" text is clicked
+        // Navigate to LogInSection when "createAnAcc" is clicked
         binding.createAnAcc.setOnClickListener {
-            Log.d(TAG, "Navigate to LogInSection")
             val intent = Intent(this, LogInSection::class.java)
             startActivity(intent)
         }
+    }
+    // Save user data to Firestore
+    private fun saveUserToFirestore(userId: String, name: String, email: String) {
+        val db = Firebase.firestore
+        val user = mapOf(
+            "name" to name,
+            "email" to email
+        )
+        db.collection("users").document(userId).set(user)
+            .addOnSuccessListener {
+                Log.d(TAG, "User profile saved successfully to Firestore")
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Failed to save user profile to Firestore", e)
+                Toast.makeText(this, "Failed to save profile. Please try again.", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    // Navigate to HomeSection
+    private fun navigateToHomeSection() {
+        val intent = Intent(this, HomeSection::class.java)
+        startActivity(intent)
+        finish() // Prevent going back to RegisterSection
     }
 
     // Google Sign-In method
@@ -92,7 +108,7 @@ class RegisterSection : AppCompatActivity() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    // Handle the result of Google Sign-In
+    // Handle Google Sign-In result
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
@@ -114,18 +130,19 @@ class RegisterSection : AppCompatActivity() {
         }
     }
 
-    // Firebase authentication with Google
+    // Firebase Authentication with Google
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-        FirebaseAuth.getInstance().signInWithCredential(credential)
+        auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithCredential:success")
-                    val user = FirebaseAuth.getInstance().currentUser
-                    // Proceed to next screen
-                    val intent = Intent(this, HomeSection::class.java)
-                    startActivity(intent)
-                    finish()
+                    val userId = auth.currentUser?.uid
+                    val name = account.displayName ?: "User"
+                    val email = account.email ?: ""
+                    if (userId != null) {
+                        saveUserToFirestore(userId, name, email) // Save user data to Firestore
+                    }
+                    navigateToHomeSection() // Redirect to HomeSection
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
@@ -133,17 +150,13 @@ class RegisterSection : AppCompatActivity() {
             }
     }
 
-
     // On start of the activity, check if the user is already logged in
     public override fun onStart() {
         super.onStart()
         auth.signOut()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            Log.d(TAG, "User is already logged in, navigating to HomeSection")
-            val intent = Intent(this, HomeSection::class.java)
-            startActivity(intent)
-            finish() // Prevent returning to RegisterSection after successful login
+            navigateToHomeSection() // If logged in, navigate to HomeSection
         }
     }
 }

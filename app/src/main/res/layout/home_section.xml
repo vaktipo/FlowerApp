@@ -22,7 +22,7 @@
     <ImageView
         android:id="@+id/topPlague"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="160dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +31,7 @@
     <ImageView
         android:id="@+id/notifications"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="90dp"
         app:layout_constraintEnd_toEndOf="@+id/topPlague"
         app:layout_constraintStart_toStartOf="@+id/topPlague"
         app:layout_constraintTop_toTopOf="@+id/topPlague"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="@+id/notifications"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/topPlague"
-        android:layout_marginTop="47dp">
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:id="@+id/left_container"
@@ -83,7 +83,7 @@
             android:id="@+id/bell"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="120dp"
             android:layout_marginTop="10dp"
             app:srcCompat="@drawable/bell" />
     </LinearLayout>
@@ -97,7 +97,7 @@
         android:textColor="@color/dark_green"
         android:textSize="15sp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notifications" />
 
@@ -112,5 +112,16 @@
         android:fontFamily="@font/poppins_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upcoming" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="377dp"
+        android:layout_height="469dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/topPlague"
+        app:srcCompat="@drawable/deal" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
