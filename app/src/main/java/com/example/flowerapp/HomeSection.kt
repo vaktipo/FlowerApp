@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.example.flowerapp.databinding.HomeSectionBinding
+import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -47,9 +49,6 @@ class HomeSection : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-        // Logout button action
-
 
     }
 }
