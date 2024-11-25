@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_mint"
+    android:background="@color/backgroundColor"
     tools:context=".LogInSection">
 
     <LinearLayout
@@ -26,7 +26,7 @@
             android:text="@string/first_time"
             android:fontFamily="@font/poppins_light"
             android:textSize="17sp"
-            android:textColor="@color/dark_green"/>
+            android:textColor="@color/dark_pink"/>
         <TextView
             android:id="@+id/create_an_acc"
             android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
             android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins_light"
             android:textSize="17sp"
-            android:textColor="@color/dark_green"/>
+            android:textColor="@color/dark_pink"/>
 
 
 
@@ -73,7 +73,7 @@
         <View
             android:layout_width="150dp"
             android:layout_height="1dp"
-            android:background="@color/dark_green"
+            android:background="@color/dark_pink"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="10dp"/>
 
@@ -84,12 +84,12 @@
             android:fontFamily="@font/poppins_light"
             android:text="@string/or"
             android:textSize="17sp"
-            android:textColor="@color/dark_green"/>
+            android:textColor="@color/dark_pink"/>
 
         <View
             android:layout_width="150dp"
             android:layout_height="1dp"
-            android:background="@color/dark_green"
+            android:background="@color/dark_pink"
             android:layout_marginTop="12dp"
             android:layout_marginStart="10dp"/>
 
@@ -119,7 +119,7 @@
         android:textSize="11sp"
         android:layout_marginBottom="25dp"
         android:layout_marginEnd="50dp"
-        android:textColor="@color/dark_green"
+        android:textColor="@color/dark_pink"
         app:layout_constraintBottom_toTopOf="@+id/LogIn"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -129,7 +129,7 @@
         android:layout_height="50dp"
         android:background="@drawable/light_button"
         android:inputType="textPassword"
-        android:textColor="@color/dark_green"
+        android:textColor="@color/dark_pink"
         android:drawableEnd="@drawable/eye_crossed"
         app:layout_constraintBottom_toTopOf="@+id/iForgotMy"
         app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +144,7 @@
         android:text="@string/password"
         android:fontFamily="@font/poppins_medium"
         android:layout_marginStart="50dp"
-        android:textColor="@color/dark_green"
+        android:textColor="@color/dark_pink"
         app:layout_constraintBottom_toTopOf="@+id/password_field"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -152,7 +152,7 @@
         android:id="@+id/email_field"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:textColor="@color/dark_green"
+        android:textColor="@color/dark_pink"
         android:background="@drawable/light_button"
         android:inputType="textEmailAddress"
         android:layout_marginBottom="10dp"
@@ -169,7 +169,7 @@
         android:text="@string/email"
         android:fontFamily="@font/poppins_medium"
         android:layout_marginStart="50dp"
-        android:textColor="@color/dark_green"
+        android:textColor="@color/dark_pink"
         app:layout_constraintBottom_toTopOf="@+id/email_field"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -181,7 +181,7 @@
         android:fontFamily="@font/poppins_bold"
         android:textSize="35sp"
         android:layout_marginBottom="10dp"
-        android:textColor="@color/dark_green"
+        android:textColor="@color/dark_pink"
         app:layout_constraintBottom_toTopOf="@+id/email_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -194,7 +194,7 @@
         android:layout_marginBottom="30dp"
         android:textSize="70sp"
         android:fontFamily="@font/poppins_bold"
-        android:textColor="@color/dark_green"
+        android:textColor="@color/dark_pink"
         app:layout_constraintBottom_toTopOf="@+id/log_in_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
