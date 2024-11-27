@@ -153,7 +153,7 @@ class RegisterSection : AppCompatActivity() {
     // On start of the activity, check if the user is already logged in
     public override fun onStart() {
         super.onStart()
-        //auth.signOut()
+        auth.signOut()
         val currentUser = auth.currentUser
         if (currentUser != null) {
             navigateToHomeSection() // If logged in, navigate to HomeSection
