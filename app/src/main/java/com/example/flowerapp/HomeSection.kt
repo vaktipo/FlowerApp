@@ -75,8 +75,7 @@ class HomeSection : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
-}
+
 
         viewpager2 = findViewById<ViewPager2>(R.id.viewpager2)
 
