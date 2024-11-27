@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.internal.kapt.incremental.UnknownSnapshot
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -46,6 +44,7 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -56,12 +55,6 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
     implementation(libs.firebase.common.ktx)
-    implementation(libs.androidx.runtime.android)
-    implementation(libs.androidx.ui.android)
-    implementation(libs.androidx.animation.core.android)
-    implementation(libs.androidx.foundation.android)
-    implementation(libs.androidx.foundation.layout.android)
-    implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -74,7 +67,4 @@ dependencies {
     implementation ("androidx.credentials:credentials-play-services-auth:1.2.2")
     implementation ("com.google.android.libraries.identity.googleid:googleid")
     implementation ("com.google.firebase:firebase-firestore-ktx:24.4.4")
-    implementation("com.google.accompanist:accompanist-pager:0.12.0")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation("androidx.activity:activity-compose:1.3.0-alpha07")
 }
