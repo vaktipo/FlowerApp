@@ -49,6 +49,7 @@ class HomeSection : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = HomeSectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Start carousel part(don't touch)
         setContent {
             MaterialTheme {
                 MyApp() // Launch the MyApp composable
