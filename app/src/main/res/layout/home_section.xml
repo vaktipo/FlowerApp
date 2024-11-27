@@ -107,4 +107,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upcoming" />
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager2"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="19dp"
+        android:layout_marginStart="12.5dp"
+        android:layout_marginEnd="12.5dp"
+        app:layout_constraintTop_toBottomOf="@+id/topPlague"/>
+
+    <LinearLayout
+        android:id="@+id/slideDotLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/viewpager2"
+        android:layout_marginTop="10dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
