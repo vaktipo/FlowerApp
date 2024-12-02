@@ -138,13 +138,13 @@
 
     <ImageView
         android:id="@+id/eye"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginEnd="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/password_field"
         app:layout_constraintEnd_toEndOf="@+id/password_field"
         app:layout_constraintTop_toTopOf="@+id/password_field"
-        app:srcCompat="@drawable/eye_crossed"/>
+        app:srcCompat="@drawable/visibility_off"/>
 
     <TextView
         android:id="@+id/password_text"
