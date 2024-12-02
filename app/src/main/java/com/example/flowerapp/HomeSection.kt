@@ -23,17 +23,27 @@ class HomeSection : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var nameOfUser: TextView
 
-    private var params = LinearLayout.LayoutParams(
-        LinearLayout.LayoutParams.WRAP_CONTENT,
-        LinearLayout.LayoutParams.WRAP_CONTENT
-    ).apply {
-        setMargins(8,0,8,0)
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_section)
         supportActionBar?.hide()
+
+        val nonActiveDotSizeDp = 5
+        val activeDotWidthDp = 12
+        val dotHeightDp = 5
+        val density = resources.displayMetrics.density
+        val nonActiveDotSizePx = (nonActiveDotSizeDp * density).toInt()
+        val activeDotWidthPx = (activeDotWidthDp * density).toInt()
+        val dotHeightPx = (dotHeightDp * density).toInt()
+
+        val params = LinearLayout.LayoutParams(
+            nonActiveDotSizePx,
+            dotHeightPx
+        ).apply {
+            setMargins(8,0,8,0)
+        }
 
         auth = FirebaseAuth.getInstance()
         nameOfUser = findViewById(R.id.name)
@@ -108,23 +118,39 @@ class HomeSection : AppCompatActivity() {
         val dotsImage = Array(imageList.size) {ImageView(this)}
 
         dotsImage.forEach {
-            it.setImageResource(
-                R.drawable.non_active_dot
-            )
-            slideDotLL.addView(it,params)
+            it.setImageResource(R.drawable.non_active_dot)
+            slideDotLL.addView(it, params)
         }
 
-        dotsImage[0].setImageResource(R.drawable.active_dot)
+        dotsImage[0].apply {
+            setImageResource(R.drawable.active_dot)
+            layoutParams = LinearLayout.LayoutParams(
+                activeDotWidthPx,
+                dotHeightPx
+            ).apply {
+                setMargins(8, 0, 8, 0)
+            }
+        }
 
-        pageChangeListener = object : ViewPager2.OnPageChangeCallback(){
+        pageChangeListener = object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                dotsImage.mapIndexed { index, imageView ->
-                    if (position == index) {
-                        imageView.setImageResource(
-                            R.drawable.active_dot
-                        )
-                    }else{
+                dotsImage.forEachIndexed { index, imageView ->
+                    if (index == position) {
+                        imageView.setImageResource(R.drawable.active_dot)
+                        imageView.layoutParams = LinearLayout.LayoutParams(
+                            activeDotWidthPx,
+                            dotHeightPx
+                        ).apply {
+                            setMargins(8, 0, 8, 0)
+                        }
+                    } else {
                         imageView.setImageResource(R.drawable.non_active_dot)
+                        imageView.layoutParams = LinearLayout.LayoutParams(
+                            nonActiveDotSizePx,
+                            dotHeightPx
+                        ).apply {
+                            setMargins(8, 0, 8, 0)
+                        }
                     }
                 }
                 super.onPageSelected(position)

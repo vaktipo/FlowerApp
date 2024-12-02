@@ -169,7 +169,7 @@ class RegisterSection : AppCompatActivity() {
 
     public override fun onStart() {
         super.onStart()
-        auth.signOut()
+//        auth.signOut()
         val currentUser = auth.currentUser
         if (currentUser != null) {
             navigateToHomeSection()
