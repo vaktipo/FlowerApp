@@ -63,6 +63,7 @@ class LogInSection : AppCompatActivity() {
             val password = passwordEditText.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
+                startActivity(Intent(this@LogInSection, LoadingSection::class.java))
                 loginUser(email, password)
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
@@ -82,6 +83,7 @@ class LogInSection : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+
                     startActivity(Intent(this@LogInSection, HomeSection::class.java))
                 } else {
                     Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
@@ -117,6 +119,7 @@ class LogInSection : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Google login successful", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@LogInSection, LoadingSection::class.java))
                     startActivity(Intent(this@LogInSection, HomeSection::class.java))
                 } else {
                     Toast.makeText(this, "Google login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()

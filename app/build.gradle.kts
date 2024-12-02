@@ -68,4 +68,5 @@ dependencies {
     implementation ("com.google.android.libraries.identity.googleid:googleid")
     implementation ("com.google.firebase:firebase-firestore-ktx:24.4.4")
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
 }

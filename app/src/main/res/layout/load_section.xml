@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".LoadingPage">
+    tools:context=".LoadingSection">
 
     <TextView
         android:id="@+id/loading_text"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/loading_text"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/loading_icon"
         android:layout_width="224dp"
         android:layout_height="313dp"

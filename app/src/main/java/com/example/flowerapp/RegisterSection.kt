@@ -69,6 +69,7 @@ class RegisterSection : AppCompatActivity() {
             val name = nameEditText.text.toString().trim()
 
             if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && terms.isChecked) {
+                startActivity(Intent(this@RegisterSection, LoadingSection::class.java))
                 registerUser(email, password, name)
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
@@ -91,6 +92,7 @@ class RegisterSection : AppCompatActivity() {
                         saveUserToFirestore(userId, name, email)
                     }
                     Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@RegisterSection, LoadingSection::class.java))
                     startActivity(Intent(this, HomeSection::class.java))
                 } else {
                     Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
@@ -116,6 +118,7 @@ class RegisterSection : AppCompatActivity() {
     }
 
     private fun navigateToHomeSection() {
+
         val intent = Intent(this, HomeSection::class.java)
         startActivity(intent)
         finish()
@@ -156,6 +159,7 @@ class RegisterSection : AppCompatActivity() {
                         saveUserToFirestore(userId, account.displayName ?: "User", account.email ?: "")
                     }
                     Toast.makeText(this, "Google sign-in successful", Toast.LENGTH_SHORT).show()
+
                     navigateToHomeSection()
                 } else {
                     Toast.makeText(this, "Google sign-in failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()

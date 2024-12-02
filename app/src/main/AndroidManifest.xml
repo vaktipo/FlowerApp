@@ -35,6 +35,11 @@
             android:name=".RememberPasswordSection"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".LoadingSection"
+            android:exported="false">
+        </activity>
+
     </application>
 
 </manifest>
