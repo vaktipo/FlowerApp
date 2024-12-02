@@ -4,10 +4,13 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +29,7 @@ class RegisterSection : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 1001 // Request code for Google Sign-In
+    private var isPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +44,8 @@ class RegisterSection : AppCompatActivity() {
         val loginButton = findViewById<TextView>(R.id.create_an_acc)
         val registerButton = findViewById<Button>(R.id.create_an_account)
         val terms = findViewById<CheckBox>(R.id.checkBox)
-        val googleSignInButton = findViewById<Button>(R.id.Sign_Up) // Add a button for Google Sign-In
+        val googleSignInButton = findViewById<Button>(R.id.Sign_Up)
+        val togglePasswordVisibility = findViewById<ImageView>(R.id.eye)// Add a button for Google Sign-In
 
         // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -74,6 +79,18 @@ class RegisterSection : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        togglePasswordVisibility.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            if (isPasswordVisible) {
+                passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                togglePasswordVisibility.setImageResource(R.drawable.visibility_on)
+            } else {
+                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+                togglePasswordVisibility.setImageResource(R.drawable.visibility_off)
+            }
+            passwordEditText.setSelection(passwordEditText.text.length)
         }
 
         // Set up Google Sign-In button click listener
@@ -169,7 +186,7 @@ class RegisterSection : AppCompatActivity() {
 
     public override fun onStart() {
         super.onStart()
-//        auth.signOut()
+           auth.signOut()
         val currentUser = auth.currentUser
         if (currentUser != null) {
             navigateToHomeSection()

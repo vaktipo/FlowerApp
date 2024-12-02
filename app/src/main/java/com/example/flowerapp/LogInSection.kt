@@ -3,9 +3,12 @@ package com.example.flowerapp
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +26,7 @@ class LogInSection : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 1001 // Request code for Google Sign-In
-
+    private var isPasswordVisible = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.log_in_section)
@@ -37,6 +40,7 @@ class LogInSection : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.LogIn)
         val googleSignInButton = findViewById<Button>(R.id.Log_in_google)
         val forgot = findViewById<TextView>(R.id.iForgotMy)
+        val togglePasswordVisibility = findViewById<ImageView>(R.id.eye)
 
         // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -69,6 +73,18 @@ class LogInSection : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
+        togglePasswordVisibility.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            if (isPasswordVisible) {
+                passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                togglePasswordVisibility.setImageResource(R.drawable.visibility_on)
+            } else {
+                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+                togglePasswordVisibility.setImageResource(R.drawable.visibility_off)
+            }
+            passwordEditText.setSelection(passwordEditText.text.length)
+        }
+
 
         // Set up Google Sign-In button click listener
         googleSignInButton.setOnClickListener {
