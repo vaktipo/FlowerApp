@@ -20,8 +20,6 @@ import java.util.UUID
 class HomeSection : AppCompatActivity() {
     private lateinit var viewpager2: ViewPager2
     private lateinit var pageChangeListener: ViewPager2.OnPageChangeCallback
-
-    private lateinit var binding: HomeSectionBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var nameOfUser: TextView
 
@@ -35,10 +33,8 @@ class HomeSection : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_section)
-        binding = HomeSectionBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        supportActionBar?.hide()
 
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
         nameOfUser = findViewById(R.id.name)
 
@@ -56,6 +52,7 @@ class HomeSection : AppCompatActivity() {
                             nameOfUser.textSize = 25f
                         }
                         else {
+                            nameOfUser.text = "$userName!"
                             nameOfUser.textSize = 30f
                         }
 

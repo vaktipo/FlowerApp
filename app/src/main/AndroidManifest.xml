@@ -31,6 +31,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
+        <activity
+            android:name=".RememberPasswordSection"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

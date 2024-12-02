@@ -27,6 +27,7 @@ class LogInSection : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.log_in_section)
+        supportActionBar?.hide()
 
         auth = FirebaseAuth.getInstance()
 
@@ -34,7 +35,8 @@ class LogInSection : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.password_field)
         val createAnAccount = findViewById<TextView>(R.id.create_an_acc)
         val loginButton = findViewById<Button>(R.id.LogIn)
-        val googleSignInButton = findViewById<Button>(R.id.Log_in_google) // Add a button for Google Sign-In
+        val googleSignInButton = findViewById<Button>(R.id.Log_in_google)
+        val forgot = findViewById<TextView>(R.id.iForgotMy)
 
         // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -48,6 +50,12 @@ class LogInSection : AppCompatActivity() {
             Log.d("Onboarding", "create now pressed")
             val goToRegisterSection = Intent(this@LogInSection, RegisterSection::class.java)
             startActivity(goToRegisterSection)
+        }
+
+        forgot.setOnClickListener{
+            Log.d("Onboarding", "forgot pressed")
+            val goToRememberPasswordSection = Intent(this@LogInSection, RememberPasswordSection::class.java)
+            startActivity(goToRememberPasswordSection)
         }
 
         loginButton.setOnClickListener {
@@ -65,6 +73,8 @@ class LogInSection : AppCompatActivity() {
         googleSignInButton.setOnClickListener {
             signInWithGoogle()
         }
+
+
     }
 
     private fun loginUser(email: String, password: String) {
