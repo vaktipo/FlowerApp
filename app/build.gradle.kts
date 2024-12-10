@@ -55,6 +55,9 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
     implementation(libs.firebase.common.ktx)
+    implementation(libs.androidx.runtime.android)
+    implementation(libs.androidx.foundation.android)
+    implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -65,8 +68,9 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
     implementation ("androidx.credentials:credentials:1.2.2")
     implementation ("androidx.credentials:credentials-play-services-auth:1.2.2")
-    implementation ("com.google.android.libraries.identity.googleid:googleid")
+    implementation ("com.google.android.libraries.identity.googleid:googleid:1.0.0")
     implementation ("com.google.firebase:firebase-firestore-ktx:24.4.4")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
+
 }

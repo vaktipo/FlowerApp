@@ -7,8 +7,10 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.example.flowerapp.adapters.ImageAdapter
 import com.example.flowerapp.databinding.HomeSectionBinding
 import com.example.flowerapp.models.ImageItem
@@ -17,13 +19,37 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.UUID
 
+data class Flower(val imageRes: Int, val title: String, val price: String)
+
+class FlowerAdapter(private val flowerList: List<Flower>) :
+    RecyclerView.Adapter<FlowerAdapter.FlowerViewHolder>() {
+
+    inner class FlowerViewHolder(itemView: android.view.View) : RecyclerView.ViewHolder(itemView) {
+        val imageView: ImageView = itemView.findViewById(R.id.itemImage)
+        val titleView: TextView = itemView.findViewById(R.id.itemTitle)
+        val priceView: TextView = itemView.findViewById(R.id.itemPrice)
+    }
+
+    override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): FlowerViewHolder {
+        val view = android.view.LayoutInflater.from(parent.context).inflate(R.layout.grid_item, parent, false)
+        return FlowerViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: FlowerViewHolder, position: Int) {
+        val flower = flowerList[position]
+        holder.titleView.text = flower.title
+        holder.priceView.text = flower.price
+        Glide.with(holder.imageView.context).load(flower.imageRes).into(holder.imageView)
+    }
+
+    override fun getItemCount(): Int = flowerList.size
+}
+
 class HomeSection : AppCompatActivity() {
     private lateinit var viewpager2: ViewPager2
     private lateinit var pageChangeListener: ViewPager2.OnPageChangeCallback
     private lateinit var auth: FirebaseAuth
     private lateinit var nameOfUser: TextView
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +68,7 @@ class HomeSection : AppCompatActivity() {
             nonActiveDotSizePx,
             dotHeightPx
         ).apply {
-            setMargins(8,0,8,0)
+            setMargins(8, 0, 8, 0)
         }
 
         auth = FirebaseAuth.getInstance()
@@ -57,17 +83,15 @@ class HomeSection : AppCompatActivity() {
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         val userName = document.getString("name") ?: "User"
-                        if (userName.length > 10){
+                        if (userName.length > 10) {
                             nameOfUser.text = "$userName!"
                             nameOfUser.textSize = 25f
-                        }
-                        else {
+                        } else {
                             nameOfUser.text = "$userName!"
                             nameOfUser.textSize = 30f
                         }
 
-                    }
-                    else {
+                    } else {
                         Toast.makeText(this, "User profile not found", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -82,7 +106,6 @@ class HomeSection : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
 
         viewpager2 = findViewById<ViewPager2>(R.id.viewpager2)
 
@@ -107,15 +130,13 @@ class HomeSection : AppCompatActivity() {
                 UUID.randomUUID().toString(),
                 "android.resource://" + packageName + "/" + R.drawable.deal
             ),
-
         )
         val imageAdapter = ImageAdapter()
         viewpager2.adapter = imageAdapter
         imageAdapter.submitList(imageList)
 
-
         val slideDotLL = findViewById<LinearLayout>(R.id.slideDotLL)
-        val dotsImage = Array(imageList.size) {ImageView(this)}
+        val dotsImage = Array(imageList.size) { ImageView(this) }
 
         dotsImage.forEach {
             it.setImageResource(R.drawable.non_active_dot)
@@ -157,6 +178,24 @@ class HomeSection : AppCompatActivity() {
             }
         }
         viewpager2.registerOnPageChangeCallback(pageChangeListener)
+
+        // --- Add RecyclerView for Flowers ---
+        val flowerRecyclerView = findViewById<RecyclerView>(R.id.gridRecyclerView)
+        val flowers = listOf(
+            Flower(R.drawable.bouqet_image, "Blush Harmony", "100 zł"),
+            Flower(R.drawable.bouqet_image, "Sunlit Serenity", "150 zł"),
+            Flower(R.drawable.bouqet_image, "Rosy Dreams", "120 zł"),
+            Flower(R.drawable.bouqet_image, "Pink Paradise", "140 zł"),
+            Flower(R.drawable.bouqet_image, "Sunlit Serenity", "150 zł"),
+            Flower(R.drawable.bouqet_image, "Rosy Dreams", "120 zł"),
+            Flower(R.drawable.bouqet_image, "Pink Paradise", "140 zł"),
+            Flower(R.drawable.bouqet_image, "Sunlit Serenity", "150 zł"),
+            Flower(R.drawable.bouqet_image, "Rosy Dreams", "120 zł"),
+            Flower(R.drawable.bouqet_image, "Pink Paradise", "140 zł")
+        )
+        val flowerAdapter = FlowerAdapter(flowers)
+        flowerRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        flowerRecyclerView.adapter = flowerAdapter
     }
 
     override fun onDestroy() {
