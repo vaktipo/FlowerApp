@@ -4,6 +4,7 @@ import android.content.ClipDescription
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -55,7 +56,7 @@ class FlowerAdapter(
 }
 // FragmentHomeActivity
 class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
-
+    private lateinit var pageChangeListener: ViewPager2.OnPageChangeCallback
     private lateinit var viewpager2: ViewPager2
     private lateinit var auth: FirebaseAuth
     private lateinit var nameOfUser: TextView
@@ -63,7 +64,22 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Firebase Authentication
+        val nonActiveDotSizeDp = 5
+        val activeDotWidthDp = 12
+        val dotHeightDp = 5
+        val density = resources.displayMetrics.density
+        val nonActiveDotSizePx = (nonActiveDotSizeDp * density).toInt()
+        val activeDotWidthPx = (activeDotWidthDp * density).toInt()
+        val dotHeightPx = (dotHeightDp * density).toInt()
+
+        val params = LinearLayout.LayoutParams(
+            nonActiveDotSizePx,
+            dotHeightPx
+        ).apply {
+            setMargins(8, 0, 8, 0)
+        }
+
+        viewpager2 = view.findViewById(R.id.viewpager2)
         auth = FirebaseAuth.getInstance()
         nameOfUser = view.findViewById(R.id.name)
 
@@ -100,7 +116,8 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
         }
 
         // --- ViewPager2 Setup ---
-        viewpager2 = view.findViewById(R.id.viewpager2)
+
+
         val imageList = arrayListOf(
             ImageItem(
                 UUID.randomUUID().toString(),
@@ -109,11 +126,67 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
             ImageItem(
                 UUID.randomUUID().toString(),
                 "android.resource://" + requireContext().packageName + "/" + R.drawable.deal
-            )
+            ),
+            ImageItem(
+                UUID.randomUUID().toString(),
+                "android.resource://" + requireContext().packageName + "/" + R.drawable.deal
+            ),
+            ImageItem(
+                UUID.randomUUID().toString(),
+                "android.resource://" + requireContext().packageName + "/" + R.drawable.deal
+            ),
+            ImageItem(
+                UUID.randomUUID().toString(),
+                "android.resource://" + requireContext().packageName + "/" + R.drawable.deal
+            ),
         )
         val imageAdapter = ImageAdapter()
         viewpager2.adapter = imageAdapter
         imageAdapter.submitList(imageList)
+
+        val slideDotLL = view.findViewById<LinearLayout>(R.id.slideDotLL)
+        val dotsImage = Array(imageList.size) { ImageView(requireContext()) }
+
+        dotsImage.forEach {
+            it.setImageResource(R.drawable.non_active_dot)
+            slideDotLL.addView(it, params)
+        }
+
+        dotsImage[0].apply {
+            setImageResource(R.drawable.active_dot)
+            layoutParams = LinearLayout.LayoutParams(
+                activeDotWidthPx,
+                dotHeightPx
+            ).apply {
+                setMargins(8, 0, 8, 0)
+            }
+        }
+
+        pageChangeListener = object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                dotsImage.forEachIndexed { index, imageView ->
+                    if (index == position) {
+                        imageView.setImageResource(R.drawable.active_dot)
+                        imageView.layoutParams = LinearLayout.LayoutParams(
+                            activeDotWidthPx,
+                            dotHeightPx
+                        ).apply {
+                            setMargins(8, 0, 8, 0)
+                        }
+                    } else {
+                        imageView.setImageResource(R.drawable.non_active_dot)
+                        imageView.layoutParams = LinearLayout.LayoutParams(
+                            nonActiveDotSizePx,
+                            dotHeightPx
+                        ).apply {
+                            setMargins(8, 0, 8, 0)
+                        }
+                    }
+                }
+                super.onPageSelected(position)
+            }
+        }
+        viewpager2.registerOnPageChangeCallback(pageChangeListener)
 
         // --- RecyclerView for Flowers ---
         val flowerRecyclerView = view.findViewById<RecyclerView>(R.id.gridRecyclerView)
