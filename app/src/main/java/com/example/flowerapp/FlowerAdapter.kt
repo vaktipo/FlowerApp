@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.flowerapp.R
 
-data class Flower(val imageRes: Int, val title: String, val price: String)
+data class Flower(val imageRes: Int, val title: String, val price: String, val description: String)
 
 class FlowerAdapter(private val flowerList: List<Flower>) :
     RecyclerView.Adapter<FlowerAdapter.FlowerViewHolder>() {

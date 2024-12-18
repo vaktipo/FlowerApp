@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "59729823495-a70ji4j9h473d29td0hkgfhi0lhldrce.apps.googleusercontent.com",
+          "client_id": "59729823495-lqtqm1994tvjsma8r97asicgqu1uu88t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flowerapp",
+            "certificate_hash": "0eba2830c095e13dd926cb1a7436586f8d6e8c50"
+          }
+        },
+        {
+          "client_id": "59729823495-dn8k8mjor5ui3o6j977aos2lrhgvdbpk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

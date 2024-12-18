@@ -10,13 +10,10 @@ class HomeSectionActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_section)
 
-        // Завантажуємо початковий фрагмент
         loadFragment(FragmentHomeActivity())
 
-        // Знаходимо BottomNavigationView
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.BottomNavigationView)
 
-        // Налаштовуємо прослуховувач для вибору елементів меню
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.bottom_home -> {
@@ -36,7 +33,6 @@ class HomeSectionActivity: AppCompatActivity() {
         }
     }
 
-    // Функція для завантаження фрагмента
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fl_wrapper, fragment)
