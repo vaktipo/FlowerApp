@@ -15,6 +15,7 @@ class ProfileSection : AppCompatActivity() {
         setContentView(R.layout.profile_section)
         supportActionBar?.hide()
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.BottomNavigationView)
+        bottomNavigationView.selectedItemId = R.id.bottom_account
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {

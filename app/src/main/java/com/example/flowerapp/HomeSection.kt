@@ -66,7 +66,7 @@ class HomeSection : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.bottom_home -> {
-
+                    bottomNavigationView.selectedItemId = R.id.bottom_home
                     true
                 }
                 R.id.bottom_calendar -> {
