@@ -72,5 +72,5 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore-ktx:24.4.4")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
-
+    implementation("com.applandeo:material-calendar-view:1.9.2")
 }

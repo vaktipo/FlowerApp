@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BouquetPage">
+
+    <ImageView
+        android:id="@+id/bouquetImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bouquet" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="700dp"
+                android:background="@drawable/round_top_bg"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_marginTop="350dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/bouquetName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Bouquet Name"
+                    android:textColor="@color/dark_pink"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/bouquetDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginTop="9.5dp"
+                    android:layout_marginEnd="26dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="Blush Harmony is a bouquet that captures the gentle beauty of romance and grace. With soft pink roses symbolizing admiration, light pink gerberas for innocence, and delicate dahlias representing elegance, this arrangement exudes warmth and tenderness. Perfect for expressing affection, appreciation, or marking a special occasion with a touch of sophistication."
+                    android:textColor="@color/dark_pink"
+                    android:textSize="12.5sp" />
+
+                <TextView
+                    android:id="@+id/bouquetContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginTop="9.5dp"
+                    android:layout_marginEnd="26dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="Flowers Included\n
+•  Light Pink Roses, representing admiration and joy.\n
+•  Pink Gerbera Daisies, symbolizing cheerfulness and innocence.\n
+•  Soft Pink Dahlias, a symbol of elegance and inner strength.\n
+•  Ranunculus in shades of pink, adding lush texture and representing charm and attractiveness.\n
+•  Waxflower as delicate filler, adding a hint of sweetness and symbolizing lasting love.\n
+•  Greenery, with soft leaves and delicate foliage, creating a natural, fresh balance.\n
+This arrangement combines gentle pinks, lush textures, and refined elegance for a timeless and heartfelt gift."
+                    android:textColor="@color/dark_pink"
+                    android:textSize="12.5sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/heart"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="15.5dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout"
+                app:srcCompat="@drawable/heart_like" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/round_light"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="100zł"
+            android:textColor="@color/dark_pink"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="15sp"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@drawable/round_dark"
+            android:text="Add to cart"
+            android:textAllCaps="false"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="15sp"
+            android:textColor="@color/white"/>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

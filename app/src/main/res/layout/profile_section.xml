@@ -29,7 +29,7 @@
         app:srcCompat="@drawable/notifications_plague" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/sectionName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
@@ -45,11 +45,11 @@
         android:id="@+id/My_favourite"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:background="@drawable/rounded_background"
-        android:gravity="center"
-        android:orientation="vertical"
         android:layout_marginStart="12dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/round_light"
+        android:gravity="center|top"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MyAccount"
         app:layout_constraintWidth_percent="0.45">
@@ -57,26 +57,27 @@
         <ImageView
             android:layout_width="53dp"
             android:layout_height="53dp"
-            android:src="@drawable/heart" />
+            android:src="@drawable/heart"
+            android:layout_marginTop="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My favourite"
             android:fontFamily="@font/poppins_medium"
-            android:textSize="20sp"
-            android:textColor="@color/dark_pink" />
+            android:text="My favourite"
+            android:textColor="@color/dark_pink"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/My_contacts"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:background="@drawable/rounded_background"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginEnd="12dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/round_light"
+        android:gravity="center|top"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MyAccount"
         app:layout_constraintWidth_percent="0.45">
@@ -84,15 +85,17 @@
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/contacts_icon"/>
+            android:src="@drawable/contacts_icon"
+            android:layout_marginTop="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
             android:text="My contacts"
             android:textColor="@color/dark_pink"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layout_marginTop="7dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -100,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="12dp"
-        android:background="@drawable/rounded_background"
+        android:background="@drawable/round_light"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -6,7 +6,7 @@
     android:layout_height="200dp"
     android:orientation="vertical"
     android:layout_margin="10dp"
-    android:background="@drawable/rounded_background">
+    android:background="@drawable/round_light">
 
     <ImageView
         android:id="@+id/itemImage"
