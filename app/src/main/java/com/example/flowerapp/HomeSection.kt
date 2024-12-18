@@ -57,7 +57,7 @@ class HomeSection : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.home_section)
+        //setContentView(R.layout.home_section)
         supportActionBar?.hide()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.BottomNavigationView)

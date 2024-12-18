@@ -34,7 +34,7 @@
             android:name=".LogInSection"
             android:exported="false" />
         <activity
-            android:name=".HomeSection"
+            android:name=".HomeSectionActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

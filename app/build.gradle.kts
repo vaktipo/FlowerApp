@@ -44,7 +44,7 @@ android {
 }
 
 dependencies {
-
+    val fragment_version = "1.8.5"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -73,4 +73,6 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
     implementation("com.applandeo:material-calendar-view:1.9.2")
+    implementation("androidx.fragment:fragment-ktx:$fragment_version")
+
 }

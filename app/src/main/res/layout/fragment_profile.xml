@@ -3,20 +3,242 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_profile"
+
+    <ImageView
+        android:id="@+id/MyAccount"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/notifications_plague" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="My account"
+        android:textSize="32sp"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="9dp"
+        android:textColor="@color/dark_pink"
+        app:layout_constraintBottom_toBottomOf="@+id/MyAccount"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/My_favourite"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@drawable/rounded_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MyAccount"
+        app:layout_constraintWidth_percent="0.45">
+
+        <ImageView
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:src="@drawable/heart" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My favourite"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="20sp"
+            android:textColor="@color/dark_pink" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/My_contacts"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@drawable/rounded_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MyAccount"
+        app:layout_constraintWidth_percent="0.45">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/contacts_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My contacts"
+            android:textColor="@color/dark_pink"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/order_history"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/rounded_background"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/My_favourite">
+
+        <ImageView
+            android:id="@+id/order_history_img"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/order_history" />
+
+        <TextView
+            android:id="@+id/Order_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Order history"
+            android:textColor="@color/dark_pink"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_history">
+
+        <LinearLayout
+            android:id="@+id/acc_info"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/round_top_light">
+
+            <TextView
+                android:id="@+id/acc_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="14dp"
+                android:text="Account information"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/dark_pink"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pay_set"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/light_pink">
+
+            <TextView
+                android:id="@+id/pay_set_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:text="Payment settings"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/dark_pink"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/notif_set"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/light_pink">
+
+            <TextView
+                android:id="@+id/notif_set_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:text="Notification settings"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/dark_pink"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/app_set"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/light_pink">
+
+            <TextView
+                android:id="@+id/app_set_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:text="Application settings"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/dark_pink"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/FaQ_set"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/light_pink">
+
+
+            <TextView
+                android:id="@+id/FaQ_set_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:text="FaQ"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/dark_pink"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/about_us"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/round_bottom_light">
+
+            <TextView
+                android:id="@+id/about_us_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:text="About us"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/dark_pink"
+                android:textSize="20dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

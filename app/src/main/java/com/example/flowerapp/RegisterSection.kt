@@ -110,7 +110,7 @@ class RegisterSection : AppCompatActivity() {
                     }
                     Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@RegisterSection, LoadingSection::class.java))
-                    startActivity(Intent(this, HomeSection::class.java))
+                    startActivity(Intent(this, HomeSectionActivity::class.java))
                 } else {
                     Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -136,7 +136,7 @@ class RegisterSection : AppCompatActivity() {
 
     private fun navigateToHomeSection() {
 
-        val intent = Intent(this, HomeSection::class.java)
+        val intent = Intent(this, HomeSectionActivity::class.java)
         startActivity(intent)
         finish()
     }

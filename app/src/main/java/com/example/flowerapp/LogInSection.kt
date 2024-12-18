@@ -100,7 +100,7 @@ class LogInSection : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
 
-                    startActivity(Intent(this@LogInSection, HomeSection::class.java))
+                    startActivity(Intent(this@LogInSection, HomeSectionActivity::class.java))
                 } else {
                     Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -136,7 +136,7 @@ class LogInSection : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Google login successful", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@LogInSection, LoadingSection::class.java))
-                    startActivity(Intent(this@LogInSection, HomeSection::class.java))
+                    startActivity(Intent(this@LogInSection, HomeSectionActivity::class.java))
                 } else {
                     Toast.makeText(this, "Google login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -149,7 +149,7 @@ class LogInSection : AppCompatActivity() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             Log.d(TAG, "User is already logged in, navigating to HomeSection")
-            val intent = Intent(this, HomeSection::class.java)
+            val intent = Intent(this, HomeSectionActivity::class.java)
             startActivity(intent)
             finish()
         }
