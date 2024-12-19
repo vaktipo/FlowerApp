@@ -37,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/topPlague"
                 app:layout_constraintStart_toStartOf="@+id/topPlague"
                 app:layout_constraintTop_toTopOf="@+id/topPlague"
-                app:srcCompat="@drawable/notifications_plague" />
+                app:srcCompat="@drawable/top_plague" />
 
             <LinearLayout
                 android:id="@+id/top_container"

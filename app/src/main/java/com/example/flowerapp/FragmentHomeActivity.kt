@@ -264,12 +264,12 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
                         upcomingEvent.text = "$eventDate - $eventName"
                     }
                 } else {
-                    upcomingEvent.text = "Немає запланованих подій"
+                    upcomingEvent.text = "No upcoming events"
                 }
             }
             .addOnFailureListener { e ->
                 android.util.Log.e("FirestoreError", "Error fetching events: ", e)
-                upcomingEvent.text = "Помилка завантаження подій"
+                upcomingEvent.text = "Error loading"
             }
     }
 }
