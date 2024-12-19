@@ -51,7 +51,7 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
                     val dateFormatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 
                     for (document in documents) {
-                        val eventTitle = document.getString("title") ?: "No Title"
+                        val eventTitle = document.getString("eventname") ?: "No Title"
                         val eventDateString = document.getString("eventdate")
 
                         if (eventDateString != null) {
