@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.flowerapp.adapters.ImageAdapter
 import com.example.flowerapp.models.ImageItem
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.UUID
@@ -60,6 +61,7 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
     private lateinit var viewpager2: ViewPager2
     private lateinit var auth: FirebaseAuth
     private lateinit var nameOfUser: TextView
+    private lateinit var upcomingEvent: TextView
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,11 +84,14 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
         viewpager2 = view.findViewById(R.id.viewpager2)
         auth = FirebaseAuth.getInstance()
         nameOfUser = view.findViewById(R.id.name)
+        upcomingEvent = view.findViewById(R.id.upcomingEvent)
 
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
             val db = Firebase.firestore
+
+            // Fetch user information
             db.collection("users").document(userId).get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
@@ -108,12 +113,18 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
+            // Fetch upcoming event
+            fetchUpcomingEvent(db, userId)
         } else {
             Toast.makeText(requireContext(), "No user is logged in", Toast.LENGTH_SHORT).show()
             val intent = Intent(requireContext(), LogInSection::class.java)
             startActivity(intent)
             requireActivity().finish()
         }
+
+
+
 
         // --- ViewPager2 Setup ---
 
@@ -236,6 +247,29 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
             }
             .addOnFailureListener { e ->
                 android.util.Log.e("FirestoreError", "Error fetching flowers: ", e)
+            }
+    }
+    private fun fetchUpcomingEvent(db: FirebaseFirestore, userId: String) {
+        db.collection("users")
+            .document(userId)
+            .collection("events")
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val firstEvent = documents.firstOrNull()
+                    firstEvent?.let { event ->
+                        val eventName = event.getString("eventname") ?: "No Title"
+                        val eventDate = event.getString("eventdate") ?: "No Date"
+//                        val eventDesc = event.getString("description") ?: "No Description"
+                        upcomingEvent.text = "$eventDate - $eventName"
+                    }
+                } else {
+                    upcomingEvent.text = "Немає запланованих подій"
+                }
+            }
+            .addOnFailureListener { e ->
+                android.util.Log.e("FirestoreError", "Error fetching events: ", e)
+                upcomingEvent.text = "Помилка завантаження подій"
             }
     }
 }
