@@ -18,6 +18,7 @@ class EditingEventFragment : Fragment(R.layout.fragment_editing_event) {
     private lateinit var eventNameEditText: EditText
     private lateinit var eventDateEditText: EditText
     private lateinit var beneficiaryEditText: EditText
+    private lateinit var recurrenceEditText: EditText
     private lateinit var saveButton: Button
 
     // Firebase instances
@@ -38,6 +39,7 @@ class EditingEventFragment : Fragment(R.layout.fragment_editing_event) {
         eventNameEditText = rootView.findViewById(R.id.name_field)
         eventDateEditText = rootView.findViewById(R.id.date_field)
         beneficiaryEditText = rootView.findViewById(R.id.ben_field)
+        recurrenceEditText = rootView.findViewById(R.id.rec_field)
         saveButton = rootView.findViewById(R.id.saveBttn)
 
         // Retrieve data passed from EventScreenFragment
@@ -45,11 +47,13 @@ class EditingEventFragment : Fragment(R.layout.fragment_editing_event) {
         val eventName = arguments?.getString("eventName")
         val eventDate = arguments?.getString("eventDate")
         val beneficiary = arguments?.getString("beneficiary")
+        val recurrence = arguments?.getString("recurrence")
 
         // Set the current event data in the edit text fields
         eventNameEditText.setText(eventName)
         eventDateEditText.setText(eventDate)
         beneficiaryEditText.setText(beneficiary)
+        recurrenceEditText.setText(recurrence)
 
         // Save button click listener
         saveButton.setOnClickListener {
@@ -57,6 +61,7 @@ class EditingEventFragment : Fragment(R.layout.fragment_editing_event) {
             val updatedEventName = eventNameEditText.text.toString().trim()
             val updatedEventDate = eventDateEditText.text.toString().trim()
             val updatedBeneficiary = beneficiaryEditText.text.toString().trim()
+            val updatedRecurrence = recurrenceEditText.text.toString().trim()
 
             // Validate the inputs
             if (updatedEventName.isEmpty() || updatedEventDate.isEmpty() || updatedBeneficiary.isEmpty()) {
@@ -69,7 +74,7 @@ class EditingEventFragment : Fragment(R.layout.fragment_editing_event) {
                     // Proceed to update event if validation passes
                     if (eventId != null) {
                         // Call function to update event in Firestore
-                        updateEvent(eventId!!, updatedEventName, updatedEventDate, updatedBeneficiary)
+                        updateEvent(eventId!!, updatedEventName, updatedEventDate, updatedBeneficiary, updatedRecurrence)
                     } else {
                         Toast.makeText(requireContext(), "Event ID is missing", Toast.LENGTH_SHORT).show()
                     }
@@ -94,7 +99,7 @@ class EditingEventFragment : Fragment(R.layout.fragment_editing_event) {
 
     // Update event in Firestore
     // Update event in Firestore
-    private fun updateEvent(eventId: String, updatedEventName: String, updatedEventDate: String, updatedBeneficiary: String) {
+    private fun updateEvent(eventId: String, updatedEventName: String, updatedEventDate: String, updatedBeneficiary: String, updatedRecurrence:String) {
         val userId = auth.currentUser?.uid
 
         if (userId != null) {
@@ -108,7 +113,8 @@ class EditingEventFragment : Fragment(R.layout.fragment_editing_event) {
             val updatedEvent: MutableMap<String, Any> = hashMapOf(
                 "eventname" to updatedEventName,
                 "eventdate" to updatedEventDate,
-                "beneficiary" to updatedBeneficiary
+                "beneficiary" to updatedBeneficiary,
+                "recurrence" to updatedRecurrence
             )
 
             // Update the event document in Firestore

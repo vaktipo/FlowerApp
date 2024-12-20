@@ -29,7 +29,7 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
     private val db = FirebaseFirestore.getInstance()
     private var dateKey: String? = null // Store the selected date key
 
-    data class Event(val eventName: String, val beneficiary: String, val eventDate: String, val eventId: String)
+    data class Event(val eventName: String, val beneficiary: String, val eventDate: String, val eventId: String, val recurrence: String)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,7 +68,8 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
                     bundle.putString("eventName", selectedEvent.eventName)
                     bundle.putString("eventDate", selectedEvent.eventDate)
                     bundle.putString("beneficiary", selectedEvent.beneficiary)
-                    bundle.putString("eventId", selectedEvent.eventId)  // Pass the eventId here
+                    bundle.putString("eventId", selectedEvent.eventId)
+                    bundle.putString("recurrence",selectedEvent.recurrence)// Pass the eventId here
                     eventScreen.arguments = bundle
 
                     parentFragmentManager.beginTransaction()
@@ -101,6 +102,7 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
                         val eventTitle = document.getString("eventname") ?: "No Title"
                         val eventDateString = document.getString("eventdate")
                         val beneficiary = document.getString("beneficiary") ?: "Unknown"
+                        val recurrence = document.getString("recurrence") ?: "Unknown"
                         val eventId = document.id  // Get the event ID from the Firestore document ID
 
                         if (eventDateString != null) {
@@ -114,7 +116,7 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
                                 calendars.add(calendarDay)
 
                                 // Store the event data in the events map including the eventId
-                                events[eventDateString] = Event(eventTitle, beneficiary, eventDateString, eventId)
+                                events[eventDateString] = Event(eventTitle, beneficiary, eventDateString, eventId, recurrence)
 
                             } catch (e: Exception) {
                                 e.printStackTrace()

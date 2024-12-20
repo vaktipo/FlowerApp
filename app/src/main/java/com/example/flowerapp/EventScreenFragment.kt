@@ -46,6 +46,7 @@ class EventScreenFragment : Fragment(R.layout.fragment_event_screen) {
         val eventName = arguments?.getString("eventName") ?: "No Name"
         val eventDate = arguments?.getString("eventDate") ?: "No Date"
         val beneficiary = arguments?.getString("beneficiary") ?: "No Beneficiary"
+        val recurrence = arguments?.getString("recurrence") ?: "No recurrence"
         eventId = arguments?.getString("eventId") // Retrieve the eventId from arguments
 
         // Set the data in the corresponding fields
@@ -64,6 +65,7 @@ class EventScreenFragment : Fragment(R.layout.fragment_event_screen) {
                 bundle.putString("eventName", eventName)
                 bundle.putString("eventDate", eventDate)
                 bundle.putString("beneficiary", beneficiary)
+                bundle.putString("recurrence",recurrence)
                 editEventFragment.arguments = bundle
 
                 parentFragmentManager.beginTransaction()
