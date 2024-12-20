@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.applandeo.materialcalendarview.CalendarDay
@@ -31,11 +32,24 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
         calendarView = rootView.findViewById(R.id.calendar)
         auth = FirebaseAuth.getInstance()
 
+        // Replace 'view.findViewById' with 'rootView.findViewById'
+        val textView = rootView.findViewById<TextView>(R.id.addNewBttn)
+
         // Fetch events from Firestore and setup calendar
         fetchEventsAndSetupCalendar()
 
+        textView.setOnClickListener {
+            // Create a new instance of FaQFragmentActivity
+            val addEventFragment = AddEventFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fl_wrapper, addEventFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
         return rootView
     }
+
 
     private fun fetchEventsAndSetupCalendar() {
         val currentUser = auth.currentUser
