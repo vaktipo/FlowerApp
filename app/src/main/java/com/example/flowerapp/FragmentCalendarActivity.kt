@@ -1,5 +1,6 @@
 package com.example.flowerapp
 
+import EventScreenFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,10 +19,17 @@ import java.util.Calendar
 import java.util.Locale
 
 class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
+
     private lateinit var calendarView: CalendarView
-    private var events: MutableMap<String, String> = mutableMapOf()
+    private lateinit var eventNameTextView: TextView
+    private lateinit var dateTextView: TextView
+    private lateinit var eventDedicationTextView: TextView
+    private var events: MutableMap<String, Event> = mutableMapOf()
     private lateinit var auth: FirebaseAuth
     private val db = FirebaseFirestore.getInstance()
+    private var dateKey: String? = null // Store the selected date key
+
+    data class Event(val eventName: String, val beneficiary: String, val eventDate: String, val eventId: String)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,14 +40,17 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
         calendarView = rootView.findViewById(R.id.calendar)
         auth = FirebaseAuth.getInstance()
 
-        // Replace 'view.findViewById' with 'rootView.findViewById'
-        val textView = rootView.findViewById<TextView>(R.id.addNewBttn)
+        eventNameTextView = rootView.findViewById(R.id.eventName)
+        dateTextView = rootView.findViewById(R.id.date)
+        eventDedicationTextView = rootView.findViewById(R.id.eventDedication)
 
-        // Fetch events from Firestore and setup calendar
+        val addBtn = rootView.findViewById<TextView>(R.id.addNewBttn)
+        val goToEvent = rootView.findViewById<TextView>(R.id.eventName)
+
         fetchEventsAndSetupCalendar()
 
-        textView.setOnClickListener {
-            // Create a new instance of FaQFragmentActivity
+        // Add button listener
+        addBtn.setOnClickListener {
             val addEventFragment = AddEventFragment()
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fl_wrapper, addEventFragment)
@@ -47,9 +58,31 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
                 .commit()
         }
 
+        // Go to event listener
+        goToEvent.setOnClickListener {
+            if (dateKey != null && events.containsKey(dateKey)) {
+                val selectedEvent = events[dateKey]
+                if (selectedEvent != null) {
+                    val eventScreen = EventScreenFragment()
+                    val bundle = Bundle()
+                    bundle.putString("eventName", selectedEvent.eventName)
+                    bundle.putString("eventDate", selectedEvent.eventDate)
+                    bundle.putString("beneficiary", selectedEvent.beneficiary)
+                    bundle.putString("eventId", selectedEvent.eventId)  // Pass the eventId here
+                    eventScreen.arguments = bundle
+
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fl_wrapper, eventScreen)
+                        .addToBackStack(null)
+                        .commit()
+                }
+            } else {
+                Toast.makeText(requireContext(), "No event found for this date", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         return rootView
     }
-
 
     private fun fetchEventsAndSetupCalendar() {
         val currentUser = auth.currentUser
@@ -67,31 +100,30 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
                     for (document in documents) {
                         val eventTitle = document.getString("eventname") ?: "No Title"
                         val eventDateString = document.getString("eventdate")
+                        val beneficiary = document.getString("beneficiary") ?: "Unknown"
+                        val eventId = document.id  // Get the event ID from the Firestore document ID
 
                         if (eventDateString != null) {
                             try {
-                                // Parse the event date string into a Calendar object
                                 val eventDate = dateFormatter.parse(eventDateString)
                                 val calendar = Calendar.getInstance().apply { time = eventDate }
 
-                                // Create a CalendarDay for the event
                                 val calendarDay = CalendarDay(calendar)
                                 calendarDay.labelColor = R.color.pink
                                 calendarDay.imageResource = R.drawable.flower
                                 calendars.add(calendarDay)
 
-                                // Map the event date to its title
-                                events[eventDateString] = eventTitle
+                                // Store the event data in the events map including the eventId
+                                events[eventDateString] = Event(eventTitle, beneficiary, eventDateString, eventId)
+
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
                         }
                     }
 
-                    // Set the marked calendar days on the CalendarView
+                    // Update the calendar view
                     calendarView.setCalendarDays(calendars)
-
-                    // Setup calendar click listeners
                     setupCalendar()
                 }
                 .addOnFailureListener { e ->
@@ -107,15 +139,12 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
         calendarView.setOnCalendarDayClickListener(object : OnCalendarDayClickListener {
             override fun onClick(calendarDay: CalendarDay) {
                 val day = String.format("%02d", calendarDay.calendar.get(Calendar.DAY_OF_MONTH))
-                val month = String.format("%02d", calendarDay.calendar.get(Calendar.MONTH) + 1) // Month is zero-based
+                val month = String.format("%02d", calendarDay.calendar.get(Calendar.MONTH) + 1)
                 val year = calendarDay.calendar.get(Calendar.YEAR)
-                val dateKey = "$day.$month.$year"
+                dateKey = "$day.$month.$year"  // Store the selected date in dateKey
 
-                if (events.containsKey(dateKey)) {
-                    Toast.makeText(requireContext(), events[dateKey], Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), "Nothing to do", Toast.LENGTH_SHORT).show()
-                }
+                // Display event details
+                displayEventDetails(dateKey!!)
             }
         })
 
@@ -134,5 +163,18 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
                 Toast.makeText(requireContext(), "$month/$year", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun displayEventDetails(dateKey: String) {
+        if (events.containsKey(dateKey)) {
+            val event = events[dateKey]!!
+            eventNameTextView.text = event.eventName
+            dateTextView.text = event.eventDate
+            eventDedicationTextView.text = "Present for: ${event.beneficiary}"
+        } else {
+            eventNameTextView.text = "No Event"
+            dateTextView.text = "No Date"
+            eventDedicationTextView.text = "No Dedication"
+        }
     }
 }
