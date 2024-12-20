@@ -63,7 +63,7 @@
         android:id="@+id/dateText"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
-        android:text="Recurrence:"
+        android:text="Date:"
         android:layout_marginStart="26dp"
         android:layout_marginTop="13.5dp"
         android:fontFamily="@font/poppins_semibold"

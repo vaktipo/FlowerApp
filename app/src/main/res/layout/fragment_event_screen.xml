@@ -32,7 +32,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/dateText"
+        android:id="@+id/dateLabel"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:text="Date:"
@@ -44,23 +44,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
-    <EditText
-        android:id="@+id/rec_field"
+    <ImageView
+        android:id="@+id/date_field"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/light_button"
-        android:inputType="textEmailAddress"
         android:layout_marginStart="25.5dp"
         android:layout_marginEnd="25.5dp"
-        android:textColor="@color/dark_pink"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/dateText"
+        app:layout_constraintTop_toBottomOf="@+id/dateLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/recText"
+        android:id="@+id/dateText"
+        android:layout_width="wrap_content"
+        android:layout_height="22.5dp"
+        android:text="20-12-2024"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/dark_pink"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/date_field"
+        app:layout_constraintStart_toStartOf="@+id/date_field"
+        app:layout_constraintTop_toTopOf="@+id/date_field" />
+
+    <TextView
+        android:id="@+id/recLabel"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:text="Recurrence:"
@@ -70,25 +79,34 @@
         android:textColor="@color/dark_pink"
         android:textSize="17.5sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rec_field" />
+        app:layout_constraintTop_toBottomOf="@+id/date_field" />
 
-    <EditText
-        android:id="@+id/name_field"
+    <ImageView
+        android:id="@+id/rec_field"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/light_button"
-        android:inputType="textEmailAddress"
         android:layout_marginStart="25.5dp"
         android:layout_marginEnd="25.5dp"
-        android:textColor="@color/dark_pink"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/recText"
+        app:layout_constraintTop_toBottomOf="@+id/recLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/benText"
+        android:id="@+id/recText"
+        android:layout_width="wrap_content"
+        android:layout_height="22.5dp"
+        android:text="once a year"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/dark_pink"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rec_field"
+        app:layout_constraintStart_toStartOf="@+id/rec_field"
+        app:layout_constraintTop_toTopOf="@+id/rec_field" />
+
+    <TextView
+        android:id="@+id/benLabel"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:layout_marginStart="26dp"
@@ -98,25 +116,34 @@
         android:textColor="@color/dark_pink"
         android:textSize="17.5sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_field" />
+        app:layout_constraintTop_toBottomOf="@+id/rec_field" />
 
-    <EditText
+    <ImageView
         android:id="@+id/ben_field"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/light_button"
-        android:inputType="textEmailAddress"
         android:layout_marginStart="25.5dp"
         android:layout_marginEnd="25.5dp"
-        android:textColor="@color/dark_pink"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/benText"
+        app:layout_constraintTop_toBottomOf="@+id/benLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/giftText"
+        android:id="@+id/benText"
+        android:layout_width="wrap_content"
+        android:layout_height="22.5dp"
+        android:text="Jane"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/dark_pink"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ben_field"
+        app:layout_constraintStart_toStartOf="@+id/ben_field"
+        app:layout_constraintTop_toTopOf="@+id/ben_field" />
+
+    <TextView
+        android:id="@+id/giftLabel"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:layout_marginStart="26dp"
@@ -127,6 +154,7 @@
         android:textSize="17.5sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ben_field" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -139,7 +167,7 @@
         android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/giftText">
+        app:layout_constraintTop_toBottomOf="@+id/giftLabel">
 
 
         <ImageView
