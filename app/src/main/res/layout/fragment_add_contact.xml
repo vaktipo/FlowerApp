@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddContactFragment">
+
+    <LinearLayout
+        android:id="@+id/topPlague"
+        android:layout_width="match_parent"
+        android:layout_height="120.5dp"
+        android:background="@drawable/top_plague"
+        android:gravity="bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/newContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginBottom="9dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="New Contact"
+            android:textColor="@color/dark_pink"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/MyAccount"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/nameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:text="Name:"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="26dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/dark_pink"
+        android:textSize="17.5sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topPlague" />
+
+    <EditText
+        android:id="@+id/name_field"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/light_button"
+        android:inputType="textEmailAddress"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
+        android:textColor="@color/dark_pink"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/nameLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/birthDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:text="Birthdate:"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="12.25dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/dark_pink"
+        android:textSize="17.5sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_field" />
+
+    <EditText
+        android:id="@+id/birthDate_field"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/light_button"
+        android:inputType="textEmailAddress"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
+        android:textColor="@color/dark_pink"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/birthDateLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/addressLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:text="Address:"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="13.5dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/dark_pink"
+        android:textSize="17.5sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthDate_field" />
+
+
+    <LinearLayout
+        android:id="@+id/cityLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="25.5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressLabel"
+        app:layout_constraintWidth_percent="0.41">
+
+        <TextView
+            android:id="@+id/cityLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="City:"
+            android:textColor="@color/dark_pink"
+            android:textSize="12.5sp" />
+
+        <EditText
+            android:id="@+id/city_field"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/light_button"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/dark_pink"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/cityLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginEnd="25.5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressLabel"
+        app:layout_constraintWidth_percent="0.41">
+
+        <TextView
+            android:id="@+id/postLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Post code:"
+            android:textColor="@color/dark_pink"
+            android:textSize="12.5sp" />
+
+        <EditText
+            android:id="@+id/post_field"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/light_button"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/dark_pink"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/postLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/streetLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityLayout">
+
+        <TextView
+            android:id="@+id/streetLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Street:"
+            android:textColor="@color/dark_pink"
+            android:textSize="12.5sp" />
+
+        <EditText
+            android:id="@+id/street_field"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/light_button"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/dark_pink"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buildLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/streetLayout">
+
+        <TextView
+            android:id="@+id/buildLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Building:"
+            android:textColor="@color/dark_pink"
+            android:textSize="12.5sp" />
+
+        <EditText
+            android:id="@+id/build_field"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/light_button"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/dark_pink"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/phoneLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buildLayout">
+
+        <TextView
+            android:id="@+id/phoneLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Phone number:"
+            android:textColor="@color/dark_pink"
+            android:textSize="12.5sp" />
+
+        <EditText
+            android:id="@+id/phone_field"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/light_button"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/dark_pink"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/infoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneLayout">
+
+        <TextView
+            android:id="@+id/infoLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Additional information:"
+            android:textColor="@color/dark_pink"
+            android:textSize="12.5sp" />
+
+
+        <EditText
+            android:id="@+id/info_field"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:background="@drawable/round_light"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/dark_pink"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveBttn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:background="@drawable/round_dark"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="94dp"
+        android:textAllCaps="false"
+        android:textSize="17.5sp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
