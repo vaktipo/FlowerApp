@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
+
 }
 
 android {
@@ -45,6 +46,7 @@ android {
 
 dependencies {
     val fragment_version = "1.8.5"
+    // or the latest version
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -74,5 +76,10 @@ dependencies {
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
     implementation("com.applandeo:material-calendar-view:1.9.2")
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
+    
+
+
+    // Add the following line if it's missing
+    implementation ("androidx.core:core-ktx:1.6.0")
 
 }

@@ -52,7 +52,7 @@
             android:id="@+id/eventName"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="Girlfriend's Birthday"
+            android:text="No events"
             android:fontFamily="@font/poppins_bold"
             android:textSize="20sp"
             android:textColor="@color/dark_pink"/>

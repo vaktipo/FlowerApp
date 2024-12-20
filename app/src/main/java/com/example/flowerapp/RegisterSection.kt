@@ -119,18 +119,39 @@ class RegisterSection : AppCompatActivity() {
 
     private fun saveUserToFirestore(userId: String, name: String, email: String) {
         val db = Firebase.firestore
+
         val user = mapOf(
             "name" to name,
             "email" to email
         )
 
+        // Save the user profile data
         db.collection("users").document(userId).set(user)
             .addOnSuccessListener {
                 Log.d(TAG, "User profile saved successfully to Firestore")
+                createEventsSubcollection(userId) // Add 'events' subcollection
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Failed to save user profile to Firestore", e)
                 Toast.makeText(this, "Failed to save profile. Please try again.", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun createEventsSubcollection(userId: String) {
+        val db = Firebase.firestore
+
+        // Add a placeholder document with a defined structure
+        val placeholderEvent = mapOf(
+            "placeholder" to true
+        )
+
+        db.collection("users").document(userId).collection("events").document("init")
+            .set(placeholderEvent)
+            .addOnSuccessListener {
+                Log.d(TAG, "'Events' subcollection created successfully")
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Failed to create 'events' subcollection", e)
             }
     }
 
