@@ -16,7 +16,14 @@
         <com.applandeo.materialcalendarview.CalendarView
             android:id="@+id/calendar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:headerColor="@color/light_pink"
+            app:headerLabelColor="@color/dark_pink"
+            app:daysLabelsColor="@color/dark_pink"
+            app:todayLabelColor="@color/light_pink"
+            app:selectionColor="@color/pink"
+            app:disabledDaysLabelsColor="@color/light_pink"/>
+
     </LinearLayout>
 
     <TextView

@@ -55,6 +55,8 @@
         android:textColor="@color/dark_pink"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@+id/nameText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
