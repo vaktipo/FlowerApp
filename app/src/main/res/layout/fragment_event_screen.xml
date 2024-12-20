@@ -7,7 +7,7 @@
     tools:context=".EventScreenFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/topPlague"
         android:layout_width="match_parent"
         android:layout_height="120.5dp"
         android:background="@drawable/top_plague"
@@ -42,7 +42,7 @@
         android:textColor="@color/dark_pink"
         android:textSize="17.5sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/topPlague" />
 
     <ImageView
         android:id="@+id/date_field"
