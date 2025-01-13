@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="@string/have_an_account"
             android:fontFamily="@font/poppins_light"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textColor="@color/dark_pink"/>
         <TextView
             android:id="@+id/create_an_acc"
@@ -33,7 +33,7 @@
             android:text="@string/log_in_now"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins_light"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textColor="@color/dark_pink"/>
 
 
@@ -42,8 +42,8 @@
 
     <Button
         android:id="@+id/Sign_Up"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/dark_button"
         android:drawableLeft="@drawable/google_icon"
@@ -52,8 +52,8 @@
         android:textColor="@color/white"
         android:textSize="17sp"
         android:textAllCaps="false"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -97,8 +97,8 @@
 
     <Button
         android:id="@+id/create_an_account"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/dark_button"
         android:fontFamily="@font/poppins_bold"
@@ -106,6 +106,8 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="17sp"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
         app:layout_constraintBottom_toTopOf="@+id/or_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -127,7 +129,7 @@
             android:layout_weight="1"
             android:text="@string/i_agree_to_the"
             android:fontFamily="@font/poppins_light"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textColor="@color/dark_pink"
             android:layout_marginEnd="2dp"/>
 
@@ -138,7 +140,7 @@
             android:layout_weight="1"
             android:text="@string/terms_and_conditions"
             android:fontFamily="@font/poppins_light"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textColor="@color/dark_pink"
             android:layout_marginStart="2dp"/>
 
@@ -146,14 +148,16 @@
 
     <EditText
         android:id="@+id/password_field"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:background="@drawable/light_button"
         android:inputType="textPassword"
         android:textColor="@color/dark_pink"
         android:layout_marginBottom="15dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
         app:layout_constraintBottom_toTopOf="@+id/agree_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -181,14 +185,16 @@
 
     <EditText
         android:id="@+id/email_field"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:background="@drawable/light_button"
         android:inputType="textEmailAddress"
         android:layout_marginBottom="10dp"
         android:textColor="@color/dark_pink"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
         app:layout_constraintBottom_toTopOf="@+id/password_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -206,14 +212,16 @@
 
     <EditText
         android:id="@+id/name_field"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:background="@drawable/light_button"
         android:inputType="textEmailAddress"
         android:layout_marginBottom="10dp"
         android:textColor="@color/dark_pink"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginEnd="25.5dp"
         app:layout_constraintBottom_toTopOf="@+id/email_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
