@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OtherCardsFragment">
+
+    <LinearLayout
+        android:id="@+id/topPlague"
+        android:layout_width="match_parent"
+        android:layout_height="120.5dp"
+        android:background="@drawable/top_plague"
+        android:gravity="bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/newContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginBottom="9dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Choose a card"
+            android:textColor="@color/dark_pink"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/MyAccount"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="187.5dp"
+        android:layout_marginStart="12.5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="12.5dp"
+        android:background="@drawable/round_pink"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topPlague">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/cardName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:fontFamily="@font/poppins_bold"
+                android:text="My card"
+                android:textColor="@color/dark_pink"
+                android:textSize="25dp" 
+                android:layout_marginRight="150dp"/>
+
+            <ImageView
+                android:id="@+id/bin"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                android:src="@drawable/bin"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/cardNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/kredit"
+            android:text="1234 **** **** 1234"
+            android:textColor="@color/dark_pink"
+            android:textSize="25sp"
+            android:layout_gravity="center_horizontal"
+            android:letterSpacing="0.13"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/cardDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kredit"
+                android:text="01/29"
+                android:textColor="@color/dark_pink"
+                android:textSize="16sp"
+                android:letterSpacing="0.1"/>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/kredit"
+                android:text="***"
+                android:textSize="16sp"
+                android:textColor="@color/dark_pink"
+                android:layout_marginStart="35dp"
+                android:letterSpacing="0.1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="82.5dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="12.5dp"
+        android:layout_marginTop="16.5dp"
+        android:layout_marginEnd="12.5dp"
+        android:background="@drawable/round_light"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="23dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/otherCardNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/kredit"
+                android:letterSpacing="0.13"
+                android:text="1234 **** **** 1234"
+                android:textColor="@color/dark_pink"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/otherCardDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kredit"
+                    android:letterSpacing="0.1"
+                    android:text="01/29"
+                    android:textColor="@color/dark_pink"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/kredit"
+                    android:letterSpacing="0.1"
+                    android:text="***"
+                    android:textColor="@color/dark_pink"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/bin" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="12.5dp"
+        android:layout_marginEnd="12.5dp"
+        android:layout_marginTop="16.5dp"
+        android:background="@drawable/round_light"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="">
+
+            <ImageView
+                android:id="@+id/cardImg"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/card" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Add a card"
+                android:textColor="@color/dark_pink"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
