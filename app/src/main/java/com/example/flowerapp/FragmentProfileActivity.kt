@@ -15,6 +15,7 @@ class FragmentProfileActivity : Fragment(R.layout.fragment_profile) {
 
         // Get the TextView by its ID (replace with your actual ID)
         val FaQ = view.findViewById<TextView>(R.id.FaQ_set_text)
+        val paymentFragment = view.findViewById<TextView>(R.id.pay_set_text)
         val contacts = view.findViewById<LinearLayout>(R.id.My_contacts) // Replace 'textViewId' with your actual TextView ID
 
         // Set click listener on the TextView
@@ -36,6 +37,14 @@ class FragmentProfileActivity : Fragment(R.layout.fragment_profile) {
                 .replace(R.id.fl_wrapper, contactsFragment) // Replace 'fragment_container' with the ID of your container
                 .addToBackStack(null) // Add to back stack to allow back navigation
                 .commit()
+        }
+        paymentFragment.setOnClickListener{
+            val paymentfragment = PaymentFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fl_wrapper, paymentfragment) // Replace 'fragment_container' with the ID of your container
+                .addToBackStack(null) // Add to back stack to allow back navigation
+                .commit()
+
         }
     }
 }

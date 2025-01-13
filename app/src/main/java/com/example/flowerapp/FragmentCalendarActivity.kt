@@ -138,6 +138,8 @@ class FragmentCalendarActivity : Fragment(R.layout.fragment_calendar) {
     }
 
     private fun setupCalendar() {
+
+
         calendarView.setOnCalendarDayClickListener(object : OnCalendarDayClickListener {
             override fun onClick(calendarDay: CalendarDay) {
                 val day = String.format("%02d", calendarDay.calendar.get(Calendar.DAY_OF_MONTH))
