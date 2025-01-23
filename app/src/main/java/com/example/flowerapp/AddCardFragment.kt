@@ -1,59 +1,180 @@
 package com.example.flowerapp
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AddCardFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AddCardFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var card_number: EditText
+    private lateinit var card_date: EditText
+    private lateinit var cvv: EditText
+    private lateinit var saveButton: View
+
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_card, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_add_card, container, false)
+
+        // Initialize the views
+        card_number = rootView.findViewById(R.id.cardNumber)
+        card_date = rootView.findViewById(R.id.cardDate)
+        cvv = rootView.findViewById(R.id.cardCVV)
+        saveButton = rootView.findViewById(R.id.saveBttn)
+
+        // Set up input validations
+        setupCardNumberValidation()
+        setupCVVValidation()
+        setupDateValidation()
+
+        // Set up button click listener
+        saveButton.setOnClickListener {
+            saveContactToFirestore { isSuccess ->
+                if (isSuccess) {
+                    val payment = PaymentFragment()
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fl_wrapper, payment)
+                        .addToBackStack(null)
+                        .commit()
+                    Toast.makeText(requireContext(), "Card successfully added!", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "Failed to add card.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        return rootView
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddCardFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddCardFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun setupCardNumberValidation() {
+        card_number.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                val input = s.toString()
+                if (input.length > 16) {
+                    card_number.setText(input.substring(0, 16))
+                    card_number.setSelection(16) // Move cursor to the end
                 }
+            }
+        })
+    }
+
+    private fun setupCVVValidation() {
+        cvv.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                val input = s.toString()
+                if (input.length > 3) {
+                    cvv.setText(input.substring(0, 3))
+                    cvv.setSelection(3) // Move cursor to the end
+                }
+            }
+        })
+    }
+
+    private fun setupDateValidation() {
+        card_date.addTextChangedListener(object : TextWatcher {
+            private var isUpdating = false
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (isUpdating) return
+
+                val input = s.toString().replace("/", "")
+                if (input.length > 4) {
+                    card_date.setText(input.substring(0, 4))
+                    card_date.setSelection(4)
+                    return
+                }
+
+                if (input.length == 4) {
+                    val formattedDate = "${input.substring(0, 2)}/${input.substring(2)}"
+                    isUpdating = true
+                    card_date.setText(formattedDate)
+                    card_date.setSelection(formattedDate.length)
+                    isUpdating = false
+                }
+            }
+        })
+    }
+
+    private fun saveContactToFirestore(onSuccess: (Boolean) -> Unit) {
+        val currentUser = auth.currentUser
+
+        if (currentUser == null) {
+            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
+            onSuccess(false)
+            return
+        }
+
+        // Get values from EditTexts
+        val cardNumber = card_number.text.toString().trim()
+        val cardDate = card_date.text.toString().trim()
+        val cardCVV = cvv.text.toString().trim()
+
+        // Validate inputs
+        if (cardNumber.isEmpty() || cardDate.isEmpty() || cardCVV.isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            onSuccess(false)
+            return
+        }
+
+        if (cardNumber.length != 16) {
+            Toast.makeText(requireContext(), "Card number must be 16 digits", Toast.LENGTH_SHORT).show()
+            onSuccess(false)
+            return
+        }
+
+        if (cardCVV.length != 3) {
+            Toast.makeText(requireContext(), "CVV must be 3 digits", Toast.LENGTH_SHORT).show()
+            onSuccess(false)
+            return
+        }
+
+        if (!cardDate.matches(Regex("\\d{2}/\\d{2}"))) {
+            Toast.makeText(requireContext(), "Date must be in MM/YY format", Toast.LENGTH_SHORT).show()
+            onSuccess(false)
+            return
+        }
+
+        // Prepare data to save
+        val cardData = hashMapOf(
+            "CardNumber" to cardNumber,
+            "CardDate" to cardDate,
+            "CVV" to cardCVV
+        )
+
+        // Save to Firestore
+        db.collection("users")
+            .document(currentUser.uid)
+            .collection("cards")
+            .add(cardData)
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), "Card saved successfully", Toast.LENGTH_SHORT).show()
+                card_number.text.clear()
+                card_date.text.clear()
+                cvv.text.clear()
+                onSuccess(true)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Failed to save card: ${e.message}", Toast.LENGTH_SHORT).show()
+                onSuccess(false)
             }
     }
 }

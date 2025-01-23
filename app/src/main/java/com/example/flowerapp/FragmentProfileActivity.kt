@@ -1,6 +1,6 @@
 package com.example.flowerapp
 
-import MyContactsFragment
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,44 +8,83 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class FragmentProfileActivity : Fragment(R.layout.fragment_profile) {
+
+    private val db = FirebaseFirestore.getInstance()
+    private val userId = FirebaseAuth.getInstance().currentUser?.uid
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Get the TextView by its ID (replace with your actual ID)
+        // Get views by their IDs
         val FaQ = view.findViewById<TextView>(R.id.FaQ_set_text)
         val paymentFragment = view.findViewById<TextView>(R.id.pay_set_text)
-        val contacts = view.findViewById<LinearLayout>(R.id.My_contacts) // Replace 'textViewId' with your actual TextView ID
+        val contacts = view.findViewById<LinearLayout>(R.id.My_contacts)
 
-        // Set click listener on the TextView
+        // Set click listener for FaQ
         FaQ.setOnClickListener {
-            // Create a new instance of FaQFragmentActivity
             val faqFragment = FaQFragmentActivity()
-
-            // Begin the FragmentTransaction and replace the current fragment with FaQFragmentActivity
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fl_wrapper, faqFragment) // Replace 'fragment_container' with the ID of your container
-                .addToBackStack(null) // Add to back stack to allow back navigation
+                .replace(R.id.fl_wrapper, faqFragment)
+                .addToBackStack(null)
                 .commit()
         }
-        contacts.setOnClickListener{
+
+        // Set click listener for Contacts
+        contacts.setOnClickListener {
             val contactsFragment = MyContactsFragment()
-
-            // Begin the FragmentTransaction and replace the current fragment with FaQFragmentActivity
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fl_wrapper, contactsFragment) // Replace 'fragment_container' with the ID of your container
-                .addToBackStack(null) // Add to back stack to allow back navigation
+                .replace(R.id.fl_wrapper, contactsFragment)
+                .addToBackStack(null)
                 .commit()
         }
-        paymentFragment.setOnClickListener{
-            val paymentfragment = PaymentFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fl_wrapper, paymentfragment) // Replace 'fragment_container' with the ID of your container
-                .addToBackStack(null) // Add to back stack to allow back navigation
-                .commit()
 
+        // Set click listener for PaymentFragment
+        paymentFragment.setOnClickListener {
+            checkForCards()
         }
+    }
+
+    private fun checkForCards() {
+        if (userId != null) {
+            db.collection("users")
+                .document(userId)
+                .collection("cards")
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (querySnapshot.isEmpty) {
+                        // No cards found, open EmptyCardFragment
+                        openEmptyCardFragment()
+                    } else {
+                        // Cards exist, open PaymentFragment
+                        openPaymentFragment()
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    // Handle errors (optional)
+                    exception.printStackTrace()
+                }
+        } else {
+            // Handle case where userId is null (e.g., user not logged in)
+        }
+    }
+
+    private fun openEmptyCardFragment() {
+        val emptyCardFragment = EmptyCardFragment()
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fl_wrapper, emptyCardFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun openPaymentFragment() {
+        val paymentFragment = PaymentFragment()
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fl_wrapper, paymentFragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
