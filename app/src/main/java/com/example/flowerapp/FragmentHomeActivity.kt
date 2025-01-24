@@ -64,6 +64,7 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
     private lateinit var nameOfUser: TextView
     private lateinit var upcomingEvent: TextView
     private lateinit var shoppingCart: ImageView
+    private lateinit var cartSum: TextView
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,6 +76,7 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
         val nonActiveDotSizePx = (nonActiveDotSizeDp * density).toInt()
         val activeDotWidthPx = (activeDotWidthDp * density).toInt()
         val dotHeightPx = (dotHeightDp * density).toInt()
+        val db = Firebase.firestore
 
         val params = LinearLayout.LayoutParams(
             nonActiveDotSizePx,
@@ -88,6 +90,10 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
         nameOfUser = view.findViewById(R.id.name)
         upcomingEvent = view.findViewById(R.id.upcomingEvent)
         shoppingCart = view.findViewById(R.id.imageView3)
+        cartSum = view.findViewById(R.id.cartSum) // Reference the cartSum TextView
+
+        // Fetch and display the total cart sum
+        fetchCartSum(db)
 
         shoppingCart.setOnClickListener {
             val shoppingCartFragment = ShoppingCartFragment()
@@ -101,7 +107,7 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
-            val db = Firebase.firestore
+
 
             // Fetch user information
             db.collection("users").document(userId).get()
@@ -231,7 +237,7 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
         flowerRecyclerView.adapter = flowerAdapter
 
         // Fetch flowers from Firestore
-        val db = Firebase.firestore
+
         db.collection("flowers")
             .get()
             .addOnSuccessListener { documents ->
@@ -261,6 +267,50 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
                 android.util.Log.e("FirestoreError", "Error fetching flowers: ", e)
             }
     }
+    private fun fetchCartSum(db: FirebaseFirestore) {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            db.collection("users")
+                .document(userId)
+                .collection("cart")
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (querySnapshot.isEmpty) {
+                        Toast.makeText(requireContext(), "Cart is empty", Toast.LENGTH_SHORT).show()
+                        cartSum.text = "0.00 zł"
+                        return@addOnSuccessListener
+                    }
+
+                    var totalSum = 0.0
+                    querySnapshot.forEach { document ->
+                        val priceString = document.getString("price")
+                        android.util.Log.d("FirestoreDebug", "Document: $document")
+                        android.util.Log.d("FirestoreDebug", "Price String: $priceString")
+
+                        // Remove any extra spaces and replace " zl" or "zł" with empty strings
+                        val price = priceString?.replace("zl", "")?.replace("zł", "")?.trim()?.toDoubleOrNull()
+                        if (price != null) {
+                            totalSum += price
+                        } else {
+                            android.util.Log.d("FirestoreDebug", "Invalid price found: $priceString")
+                        }
+                    }
+
+                    // Update the total sum and display
+                    android.util.Log.d("FirestoreDebug", "Total Sum: $totalSum")
+                    cartSum.text = String.format("%.2f zł", totalSum)
+                    //Toast.makeText(requireContext(), "Total Sum: $totalSum zł", Toast.LENGTH_LONG).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireContext(), "Firestore query failed", Toast.LENGTH_SHORT).show()
+                    android.util.Log.e("FirestoreError", "Error fetching cart: ", e)
+                }
+        } else {
+            Toast.makeText(requireContext(), "No user logged in", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun fetchUpcomingEvent(db: FirebaseFirestore, userId: String) {
         db.collection("users")
             .document(userId)
