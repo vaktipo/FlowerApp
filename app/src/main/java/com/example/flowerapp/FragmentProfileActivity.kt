@@ -26,7 +26,7 @@ class FragmentProfileActivity : Fragment(R.layout.fragment_profile) {
         val FaQ = view.findViewById<TextView>(R.id.FaQ_set_text)
         val paymentFragment = view.findViewById<TextView>(R.id.pay_set_text)
         val contacts = view.findViewById<LinearLayout>(R.id.My_contacts)
-        val logout = view.findViewById<Button>(R.id.logoutButton)
+        val logout = view.findViewById<TextView>(R.id.logoutButton)
 
         logout.setOnClickListener {
             auth.signOut() // Log out the user
