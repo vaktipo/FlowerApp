@@ -1,5 +1,6 @@
 package com.example.flowerapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -7,7 +8,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import org.w3c.dom.Text
 
 class BouquetPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,5 +44,13 @@ class BouquetPage : AppCompatActivity() {
         priceTextView.text = flowerPrice
         descriptionTextView.text = flowerDescription
         //imageView.setImageResource(flowerImageRes)
+
+        // Handle click on backArrow to navigate to HomeSectionActivity
+        val backArrow = findViewById<ImageView>(R.id.heart)
+        backArrow.setOnClickListener {
+            val intent = Intent(this, HomeSectionActivity::class.java)
+            startActivity(intent)
+            finish() // Optional: Close current activity
+        }
     }
 }
