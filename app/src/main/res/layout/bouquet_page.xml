@@ -29,7 +29,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="50dp">
+
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -38,7 +40,7 @@
                 android:background="@drawable/round_top_bg"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:layout_marginTop="350dp"
+                android:layout_marginTop="300dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,6 +146,7 @@ This arrangement combines gentle pinks, lush textures, and refined elegance for 
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back_arrow" />
