@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="107dp"
     android:background="@drawable/round_light"
-    android:layout_marginStart="25.5dp"
-    android:layout_marginEnd="25.5dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
     android:layout_marginTop="12.25dp"
     android:orientation="horizontal"
     android:gravity="center_vertical">
