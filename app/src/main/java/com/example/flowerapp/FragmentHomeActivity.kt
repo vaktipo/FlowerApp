@@ -1,5 +1,6 @@
 package com.example.flowerapp
 
+import ShoppingCartFragment
 import android.content.ClipDescription
 import android.content.Intent
 import android.os.Bundle
@@ -62,6 +63,7 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
     private lateinit var auth: FirebaseAuth
     private lateinit var nameOfUser: TextView
     private lateinit var upcomingEvent: TextView
+    private lateinit var shoppingCart: ImageView
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,6 +87,16 @@ class FragmentHomeActivity : Fragment(R.layout.fragment_home) {
         auth = FirebaseAuth.getInstance()
         nameOfUser = view.findViewById(R.id.name)
         upcomingEvent = view.findViewById(R.id.upcomingEvent)
+        shoppingCart = view.findViewById(R.id.imageView3)
+
+        shoppingCart.setOnClickListener {
+            val shoppingCartFragment = ShoppingCartFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fl_wrapper, shoppingCartFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
 
         val currentUser = auth.currentUser
         if (currentUser != null) {
