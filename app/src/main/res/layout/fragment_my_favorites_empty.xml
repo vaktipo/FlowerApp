@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".my_favorites_empty">
+
+
+    <ImageView
+        android:id="@+id/topPlague"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/top_plague" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="My favorites"
+        android:textSize="32sp"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="9dp"
+        android:textColor="@color/dark_pink"
+        app:layout_constraintBottom_toBottomOf="@+id/topPlague"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:background="@drawable/round_light"
+        android:layout_marginStart="12.5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="12.5dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topPlague">
+        >
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="26.25dp"
+            android:text="This space feels a little empty..."
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="17.5sp"
+            android:textColor="@color/dark_pink"/>
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:text="Fill it with your favorite flowers and smiles."
+            android:fontFamily="@font/poppins_light"
+            android:textSize="10sp"
+            android:textColor="@color/dark_pink"
+            android:layout_marginTop="-4.25dp"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/addtofav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Let’s add some"
+        android:background="@drawable/round_dark"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="94dp"
+        android:textAllCaps="false"
+        android:textSize="17.5sp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
