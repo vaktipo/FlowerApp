@@ -8,15 +8,18 @@ import com.example.flowerapp.CartAdapter
 import com.example.flowerapp.CartItem
 import com.example.flowerapp.R
 
-
 class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart) {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var totalPriceTextView: TextView
     private val cartItems = mutableListOf<CartItem>()
     private lateinit var cartAdapter: CartAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        recyclerView = view.findViewById(R.id.recyclerView)
+        totalPriceTextView = view.findViewById(R.id.totalPrice)
 
         cartAdapter = CartAdapter(cartItems) { item ->
             removeItemFromCart(item)
@@ -27,6 +30,7 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart) {
 
         // Example of adding an item programmatically
         addItemToCart(CartItem("Blush Harmony", 100, R.drawable.bouqet_image))
+        addItemToCart(CartItem("Another", 200, R.drawable.bouqet_image))
 
         updateTotalPrice()
     }
@@ -47,7 +51,6 @@ class ShoppingCartFragment : Fragment(R.layout.fragment_shopping_cart) {
     }
 
     private fun updateTotalPrice() {
-        val totalPriceTextView = requireView().findViewById<TextView>(R.id.totalPrice)
         val total = cartItems.sumOf { it.price }
         totalPriceTextView.text = "${total}zł"
     }
